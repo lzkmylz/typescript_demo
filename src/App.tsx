@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './App.css';
+import HomeContainer from './apps/home/containers/HomeContainer';
 
 import logo from './logo.svg';
 
@@ -13,7 +14,9 @@ class App extends React.Component {
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
+          Yes, typescript is different!
         </p>
+        <HomeContainer />
       </div>
     );
   }
