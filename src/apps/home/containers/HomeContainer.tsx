@@ -1,9 +1,11 @@
 import * as React from 'react';
 import HomeStore from '../stores/HomeStore';
+import { observer } from 'mobx-react';
 
-import Button from 'antd/lib/button';
+import { Button } from 'antd';
 import '../styles/HomeContainer.css';
 
+@observer
 class HomeContainer extends React.Component {
   handleClick = (): void => {
     HomeStore.changeUsername();

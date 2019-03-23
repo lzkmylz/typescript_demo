@@ -67,6 +67,7 @@
     "enzyme": "^3.9.0",
     "mobx-react-devtools": "^6.1.1",
     "react-test-renderer": "^16.8.4",
+    "ts-import-plugin": "^1.5.5",
     "typescript": "^3.3.3333"
   },
   "jest": {

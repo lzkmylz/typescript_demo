@@ -12,6 +12,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const tsImportPluginFactory = require('ts-import-plugin');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -117,7 +118,6 @@ module.exports = {
       // TODO: Disable require.ensure as it's not a standard language feature.
       // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
       // { parser: { requireEnsure: false } },
-
       {
         test: /\.(js|jsx|mjs)$/,
         loader: require.resolve('source-map-loader'),
@@ -200,6 +200,20 @@ module.exports = {
                 },
               },
             ],
+          },
+          {
+            test: /\.(jsx|tsx|js|ts)$/,
+            loader: require.resolve('ts-loader'),
+            options: {
+              transpileOnly: true,
+              getCustomTransformers: () => ({
+                before: [ tsImportPluginFactory({ style: 'css' }) ]
+              }),
+              compilerOptions: {
+                module: 'es2015'
+              }
+            },
+            exclude: /node_modules/
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
